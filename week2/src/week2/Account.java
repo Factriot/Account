@@ -1,28 +1,31 @@
 package week2;
 
 public class Account {
-	protected double money;
-	private int i;
+	private double balance;
 	
-	public Account(int i){
-		this.i=i;
+	public Account(double b){
+		balance = b;
 	}
-	
+
 	public void Credit(double m){
-		this.money += m;
+		balance += m;
 	}
 	
-	public boolean Debit(double m){
-		if(this.money-m < 0){
-			return true;
+	public String Debit(double m){
+		if(balance-m < 0){
+			return "Debit amount exceeded account balance\n";
 		}else{
-			this.money -= m;
-			return false;
+			balance -= m;
+			return null;
 		}
 	}
 	
-	public void getBalance(){
-		System.out.printf("account%d balance: $%4.2f\n", i, money);
+	public double getBalance(){
+		return balance;
+	}
+	
+	protected void setBalance(double b){
+		balance = b;
 	}
 
 }
