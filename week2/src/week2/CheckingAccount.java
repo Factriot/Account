@@ -7,7 +7,6 @@ public class CheckingAccount extends Account{
 	
 	CheckingAccount(double b, double c, double i, double l){
 		super(b);
-		setBalance(b);
 		credit_limit = c;
 		interest = i;
 		loan_interest = l;
