@@ -33,7 +33,7 @@ public class CheckingAccount extends Account{
 			setBalance(b*(1+interest));
 		}
 		else if(b < 0){
-			setBalance(b*(1-loan_interest));
+			setBalance(b*(1+loan_interest));
 		}
 	}
 
