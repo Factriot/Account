@@ -1,7 +1,10 @@
 package week2;
 
-public class Account {
+public abstract class Account {
 	private double balance;
+	
+	public abstract double getWithdrawableAccount();
+	public abstract double passTime(int t);
 	
 	public Account(double b){
 		balance = b;
@@ -11,12 +14,11 @@ public class Account {
 		balance += m;
 	}
 	
-	public String Debit(double m){
+	public void debit(double m){
 		if(balance-m < 0){
-			return "Debit amount exceeded account balance\n";
+			//System.out.println("Debit amount exceeded account balance");
 		}else{
-			balance -= m;
-			return null;
+			setBalance(getBalance()-m);
 		}
 	}
 	

@@ -1,11 +1,12 @@
 package week2;
+import java.math.*;
 
 public class CheckingAccount extends Account{
 	private double credit_limit;
 	private double interest;
 	private double loan_interest;
 	
-	CheckingAccount(double b, double c, double i, double l){
+	public CheckingAccount(double b, double c, double i, double l){
 		super(b);
 		credit_limit = c;
 		interest = i;
@@ -13,20 +14,30 @@ public class CheckingAccount extends Account{
 	}
 	
 	@Override
-	public String Debit(double m){
-		double next = getBalance()-m;
-		setBalance(next);
-		double b = getBalance();
-		if(b < 0){
-			String s = "잔액이 0원보다 작습니다.";
-			if(b < -credit_limit){
-				s = s+"\n한도를 넘어 출금 불가능 합니다.";
-				setBalance(getBalance()+m);
-			}
-			return s;
-		}
-		return null;
+	public double getWithdrawableAccount(){
+		double n = getBalance()+credit_limit;
+		return n<=0?0.0:n;
 	}
+	
+	@Override
+	public double passTime(int t){
+		if(getBalance() > 0){
+			setBalance(getBalance()*Math.pow((1+interest), t));
+			return getBalance()*Math.pow((1+interest), t);
+		}
+		setBalance(getBalance()*Math.pow((1+loan_interest), t));
+		return getBalance();
+	}
+	
+	public boolean isBankrupted(){
+		return getBalance() < -credit_limit;
+	}
+	
+	@Override
+	public void debit(double m){
+		setBalance(getBalance()-m);
+	}
+	
 	public void nextMonth(){
 		double b = (double) getBalance();
 		if(b > 0){
