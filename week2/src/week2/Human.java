@@ -10,7 +10,7 @@ public class Human implements Valuable{
 	}
 	
 	public String toString(){
-		return "Human name: "+name+"\nregistered age: "+age;
+		return String.format("Human name: : %s\n", name)+String.format("registered age: %d", age);
 	}
 	
 	public double estimateValue(int month){
