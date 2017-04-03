@@ -1,6 +1,6 @@
 package week2;
 
-public abstract class Account {
+public abstract class Account implements Valuable{
 	private double balance;
 	
 	public abstract double getWithdrawableAccount();

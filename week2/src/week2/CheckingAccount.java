@@ -47,5 +47,13 @@ public class CheckingAccount extends Account{
 			setBalance(b*(1+loan_interest));
 		}
 	}
-
+	
+	public String toString(){
+		return String.format("CheckingAccount_Balance: %.2f", getBalance());
+	}
+	
+	public double estimateValue(int month){
+		passTime(month);
+		return getBalance();
+	}
 }
