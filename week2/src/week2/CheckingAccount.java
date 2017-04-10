@@ -34,8 +34,14 @@ public class CheckingAccount extends Account{
 	}
 	
 	@Override
-	public void debit(double m){
-		setBalance(getBalance()-m);
+	public void debit(double m) throws Exception{
+		if(m < 0){
+			throw new Exception("음수입력!");
+		}else if(getBalance()-m < 0){
+			throw new Exception("Debit amount exceeded account balance.");
+		}else{
+			setBalance(getBalance()-m);
+		}
 	}
 	
 	public void nextMonth(){

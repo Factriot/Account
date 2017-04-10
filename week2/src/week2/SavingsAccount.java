@@ -32,10 +32,14 @@ public class SavingsAccount extends Account{
 	}
 	
 	@Override
-	public void debit(double money){
+	public void debit(double money) throws Exception{
 		if(getTime() < 12){
-			System.out.println("아직 출금할 수 없습니다!");
-		} else {
+			throw new Exception("아직 출금할 수 없습니다.");
+		} else if(money < 0){
+			throw new SignException("음수입력!");
+		}else if(getBalance()-money < 0){
+			throw new Exception("Debit amount exceeded balance.");
+		}else{
 			setBalance(getBalance()-money);
 		}
 	}
