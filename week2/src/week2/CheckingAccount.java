@@ -5,6 +5,7 @@ public class CheckingAccount extends Account{
 	private double credit_limit;
 	private double interest;
 	private double loan_interest;
+	private int month = 0;
 	
 	public CheckingAccount(double b, double c, double i, double l){
 		super(b);
@@ -23,10 +24,17 @@ public class CheckingAccount extends Account{
 	public double passTime(int t){
 		if(getBalance() > 0){
 			setBalance(getBalance()*Math.pow((1+interest), t));
-			return getBalance()*Math.pow((1+interest), t);
+			return getBalance();
+			//setBalance(getBalance()*(1+interest)*t);
+			//return getBalance()*(1+interest)*t;
 		}
 		setBalance(getBalance()*Math.pow((1+loan_interest), t));
+		//setBalance(getBalance()*(1+loan_interest)*t);
 		return getBalance();
+	}
+	
+	public void passTime(){
+		setBalance(getBalance()*(1+interest));
 	}
 	
 	public boolean isBankrupted(){
@@ -34,11 +42,11 @@ public class CheckingAccount extends Account{
 	}
 	
 	@Override
-	public void debit(double m) throws Exception{
+	public void debit(double m) throws SignException{
 		if(m < 0){
-			throw new Exception("음수입력!");
-		}else if(getBalance()-m < 0){
-			throw new Exception("Debit amount exceeded account balance.");
+			throw new SignException("음수입력!");
+		}else if(getBalance()+credit_limit-m < 0){
+			throw new SignException("Debit amount exceeded account balance.");
 		}else{
 			setBalance(getBalance()-m);
 		}
@@ -59,7 +67,12 @@ public class CheckingAccount extends Account{
 	}
 	
 	public double estimateValue(int month){
-		passTime(month);
-		return getBalance();
+		//passTime(month);
+		return getBalance()*(1+interest*month);
+	}
+	
+	public double estimateValue(){
+		//passTime();
+		return getBalance()*(1+interest);
 	}
 }

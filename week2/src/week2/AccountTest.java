@@ -23,7 +23,7 @@ public class AccountTest {
 			
 		} catch (InputMismatchException e){
 			System.out.println("예외발생 : 숫자를 입력하세요\n"+e.toString());
-		} catch (Exception e) {
+		} catch (SignException e) {
 			System.out.println("예외발생  "+e.toString());
 		} finally {
 			account1.passTime(2);

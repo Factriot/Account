@@ -14,11 +14,11 @@ public abstract class Account implements Valuable{
 		balance += m;
 	}
 	
-	public void debit(double amount) throws Exception{
+	public void debit(double amount) throws SignException{
 		if(amount < 0){
 			throw new SignException("음수입력!");
 		}else if(balance-amount < 0){
-			throw new Exception("Debit amount exceeded balance.");
+			throw new SignException("Debit amount exceeded balance.");
 			//System.out.println("Debit amount exceeded account balance");
 		}else{
 			setBalance(getBalance()-amount);
@@ -32,5 +32,5 @@ public abstract class Account implements Valuable{
 	protected void setBalance(double b){
 		balance = b;
 	}
-
+	
 }
