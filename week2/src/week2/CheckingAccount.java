@@ -23,7 +23,8 @@ public class CheckingAccount extends Account{
 	@Override
 	public double passTime(int t){
 		if(getBalance() > 0){
-			setBalance(getBalance()*Math.pow((1+interest), t));
+			//setBalance(getBalance()*Math.pow((1+interest), t));
+			setBalance(getBalance()*(1+interest*t));
 			return getBalance();
 			//setBalance(getBalance()*(1+interest)*t);
 			//return getBalance()*(1+interest)*t;
